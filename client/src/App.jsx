@@ -17,7 +17,7 @@ export default function App() {
     
     <div className='px-4 sm:px-[5vw] md:px-[7vw] lg:px-[9vw]'>
       <NavBar/>
-      <Hero/>
+      {/* <Hero/> */}
       <Routes>
        <Route path='/' element={<Home/>}/>
        <Route path='about' element={<About/>}/>
