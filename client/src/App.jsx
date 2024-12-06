@@ -11,6 +11,7 @@ import Collection from './pages/Collection';
 import Card from './pages/card';
 import NavBar from './components/NavBar';
 import Hero from './components/Hero';
+import Footer from './components/Footer';
 
 export default function App() {
   return (
@@ -29,6 +30,7 @@ export default function App() {
        <Route path='/login' element={<Login/>}/>
        <Route path='/collection' element={<Collection/>}/>
       </Routes>
+      <Footer/>
     </div>
   )
 }

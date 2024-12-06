@@ -13,7 +13,7 @@ export default function Bestseller() {
     useEffect(()=>{
         const bestProducts = products.filter(item=>item.bestseller);
         setBestseller(bestProducts.slice(0,5))
-    } )
+    } ,[])
   return (
     <div className='my-10'>
         <div className=" text-3xl text-center p-8">

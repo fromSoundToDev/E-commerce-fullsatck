@@ -1,8 +1,10 @@
 import React from 'react'
 import Hero from '../components/Hero'
 import LatestProducts from '../components/LatestProducts'
-import Title from '../components/Title'
 import Bestseller from '../components/Bestseller'
+import Footer from '../components/Footer'
+import OurPolicy from '../components/OurPolicy'
+import NewsletterBox from '../components/NewsletterBox'
 
 export default function Home() {
   return (
@@ -10,6 +12,9 @@ export default function Home() {
       <Hero/>
       <LatestProducts/>
       <Bestseller/>
+      <OurPolicy/>
+      <NewsletterBox/>
+      
     </div>
   )
 }
