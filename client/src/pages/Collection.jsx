@@ -3,7 +3,7 @@ import LatestProducts from "../components/LatestProducts";
 
 export default function Collection() {
   return (
-    <div className="flex flex-col sm:grid grid-cols-5">
+    <div className="flex flex-col sm:grid grid-cols-6">
       <div className="col-span-1">
         <div className="text-[20px] sm:text-[22px] text-[#343434]">FILTERS</div>
         {/* filter  */}
@@ -87,14 +87,24 @@ export default function Collection() {
         </div>
       </div>
       {/* collections  */}
-      <div className="col-span-4">
+      <div className="col-span-5">
         {/* collection title  */}
-        <div className="">
-          
-        </div>
+        <div className=""></div>
 
         {/* collection item  */}
-        <div className=""></div>
+        <div className="">
+          {/* title  */}
+          <div className="flex ">
+            <h1 className="">
+              <span className="">ALL</span>COLLECTIONS
+            </h1>
+            <hr className="" />
+          </div>
+          {/* selection  */}
+          <select name="" id="" className="">
+            <option value="" className=""></option>
+          </select>
+        </div>
       </div>
     </div>
   );
