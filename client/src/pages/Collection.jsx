@@ -1,16 +1,25 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import LatestProducts from "../components/LatestProducts";
+import { ShopContext } from "../context/ShopContext";
+
+
 
 export default function Collection() {
+  const [filterProduct,setFilterProduct] = useState([])
+ const {products}  =useContext(ShopContext)
+ useEffect(() => {
+   setFilterProduct(products)
+ }, [])
+ 
   return (
-    <div className="flex flex-col sm:grid grid-cols-6">
-      <div className="col-span-1">
+    <div className="flex flex-col sm:grid sm:grid-cols-6 gap-2">
+      <div className="col-span-1 py-4">
         <div className="text-[20px] sm:text-[22px] text-[#343434]">FILTERS</div>
         {/* filter  */}
         <div className=" flex  gap-4 justify-around sm:flex-col  ">
           {/* filter1  */}
 
-          <div className="border-[#C8C8C8] border-[1px] flex flex-col  justify-center p-2 w-72  ">
+          <div className="border-[#C8C8C8] border-[1px] flex flex-col  justify-center p-2 w-72 sm:w-full  ">
             <h3 className=" font-normal text-[16px] text-[#212121]">
               Category
             </h3>
@@ -46,7 +55,7 @@ export default function Collection() {
           </div>
 
           {/* filter2  */}
-          <div className="border-[#C8C8C8] border-[1px] flex flex-col  justify-center p-2 w-72  ">
+          <div className="border-[#C8C8C8] border-[1px] flex flex-col  justify-center p-2 w-72 sm:w-full   ">
             <h3 className=" font-normal text-[16px] text-[#212121]">Type</h3>
             <ul className=" flex flex-col  space-y-2">
               <li className=" flex flex-row items-center">
@@ -87,24 +96,39 @@ export default function Collection() {
         </div>
       </div>
       {/* collections  */}
-      <div className="col-span-5">
+      <div className="col-span-5 px-4">
         {/* collection title  */}
-        <div className=""></div>
-
-        {/* collection item  */}
-        <div className="">
+        <div className=" flex flex-row justify-between px-2">
           {/* title  */}
-          <div className="flex ">
-            <h1 className="">
-              <span className="">ALL</span>COLLECTIONS
+          <div className="flex items-center">
+            <h1 className="font-normal text-xl sm:text-2xl">
+              <span className="text-[#707070]">ALL</span>COLLECTIONS
             </h1>
-            <hr className="" />
+            <hr className=" w-10 h-[2px] bg-[#252525]" />
           </div>
           {/* selection  */}
-          <select name="" id="" className="">
-            <option value="" className=""></option>
+          <select name="" id="" className=" border-gray-300 text-sm p-2">
+            <option value="" className="">
+              sort by: relevant
+            </option>
+            <option value="" className="">
+              sort by: hight to low
+            </option>
+            <option value="" className="">
+              sort by: low to hight
+            </option>
           </select>
         </div>
+
+        {/* collection item  */}
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 gap-y-6">
+
+          {
+            filterProduct.map(())
+          }
+
+        </div>
+        
       </div>
     </div>
   );
