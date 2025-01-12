@@ -2,14 +2,16 @@ import React, { useContext, useEffect, useState } from "react";
 import LatestProducts from "../components/LatestProducts";
 import { ShopContext } from "../context/ShopContext";
 import { assets } from "../assets/assets/";
+import ProductItem from "../components/ProductItem";
 
 
 
 export default function Collection() {
   const [filterProduct,setFilterProduct] = useState([])
-  const [filter,setFilter] = useState(true)
+  const [filter,setFilter] = useState(false)
 
- const {products}  =useContext(ShopContext)
+ const {products}  = useContext(ShopContext)
+
  useEffect(() => {
    setFilterProduct(products)
  }, [])
@@ -20,7 +22,7 @@ export default function Collection() {
         <p   onClick={()=>setFilter(!filter)}  className="text-[20px] sm:text-[22px] flex items-center  text-[#343434]">FILTERS <img src={assets.dropdown_icon} alt="" className={`h-4 sm:hidden  mx-2 ${filter?'rotate-90':''}  `} />
         </p>
         {/* filter  */}
-        <div className={`${filter?'':'hidden'} `}>
+        <div className={`${filter?'':'hidden'} sm:block` }>
           <div className="flex gap-4 justify-around sm:flex-col">
           {/* filter1  */}
           <div className="border-[#C8C8C8] border-[1px] flex flex-col  justify-center p-2 w-72 sm:w-full  ">
@@ -131,7 +133,17 @@ export default function Collection() {
         {/* collection item  */}
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 gap-y-6">
 
-          
+          {
+            filterProduct.map((el,index)=>{
+           return   <ProductItem
+              key={index}
+              name={el.name}
+              price={el.price}
+              id={el._id}
+              image={el.image}
+              />
+            })
+          }
 
         </div>
         
