@@ -1,11 +1,14 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import LatestProducts from "../components/LatestProducts";
 import { ShopContext } from "../context/ShopContext";
+import { assets } from "../assets/assets/";
 
 
 
 export default function Collection() {
   const [filterProduct,setFilterProduct] = useState([])
+  const [filter,setFilter] = useState(true)
+
  const {products}  =useContext(ShopContext)
  useEffect(() => {
    setFilterProduct(products)
@@ -14,11 +17,12 @@ export default function Collection() {
   return (
     <div className="flex flex-col sm:grid sm:grid-cols-6 gap-2">
       <div className="col-span-1 py-4">
-        <div className="text-[20px] sm:text-[22px] text-[#343434]">FILTERS</div>
+        <p   onClick={()=>setFilter(!filter)}  className="text-[20px] sm:text-[22px] flex items-center  text-[#343434]">FILTERS <img src={assets.dropdown_icon} alt="" className={`h-4 sm:hidden  mx-2 ${filter?'rotate-90':''}  `} />
+        </p>
         {/* filter  */}
-        <div className=" flex  gap-4 justify-around sm:flex-col  ">
+        <div className={`${filter?'':'hidden'} `}>
+          <div className="flex gap-4 justify-around sm:flex-col">
           {/* filter1  */}
-
           <div className="border-[#C8C8C8] border-[1px] flex flex-col  justify-center p-2 w-72 sm:w-full  ">
             <h3 className=" font-normal text-[16px] text-[#212121]">
               Category
@@ -93,6 +97,10 @@ export default function Collection() {
               </li>
             </ul>
           </div>
+
+          </div>
+
+
         </div>
       </div>
       {/* collections  */}
@@ -123,9 +131,7 @@ export default function Collection() {
         {/* collection item  */}
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 gap-y-6">
 
-          {
-            filterProduct.map(())
-          }
+          
 
         </div>
         
