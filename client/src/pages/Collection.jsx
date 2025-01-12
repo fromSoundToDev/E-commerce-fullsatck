@@ -9,13 +9,48 @@ import ProductItem from "../components/ProductItem";
 export default function Collection() {
   const [filterProduct,setFilterProduct] = useState([])
   const [filter,setFilter] = useState(false)
-
  const {products}  = useContext(ShopContext)
+ const [category,setCategory] = useState([])
+ const [subCategory,setSubCategory] =useState([])
+
+ const togleCategory = (e)=>{
+  if (category.includes(e.target.value)) {
+    setCategory( prev => prev.filter(item=>item!==e.target.value))
+   
+  } else {
+   setCategory( prev => [...prev ,  e.target.value])
+  }
+ }
+ const togleSubCategory = (e)=>{
+  if (subCategory.includes(e.target.value)) {
+    setSubCategory( prev => prev.filter(item=>item!==e.target.value))
+   
+  } else {
+    setSubCategory(prev => [...prev , e.target.value] )
+  }
+ }
+
+//  filter implementation 
+
+const applyFilter = ()=>{
+  let productsCopy = products.slice()
+  if (category.length>0) {
+   productsCopy= productsCopy.filter(item=>category.includes(item.category))
+  }
+  if (subCategory.length>0) {
+   
+   productsCopy = productsCopy.filter(item=>subCategory.includes(item.subCategory))
+  }
+  setFilterProduct(productsCopy)
+}
 
  useEffect(() => {
    setFilterProduct(products)
  }, [])
- 
+
+ useEffect(()=>{
+  applyFilter()
+ },[category,subCategory])
   return (
     <div className="flex flex-col sm:grid sm:grid-cols-6 gap-2">
       <div className="col-span-1 py-4">
@@ -32,7 +67,9 @@ export default function Collection() {
             <ul className=" flex flex-col  space-y-2">
               <li className=" flex flex-row items-center">
                 <input
+                onChange={togleCategory}
                   type="checkbox"
+                  value={"Men"}
                   name=""
                   id=""
                   className="mr-2 text-[#C1C1C1]"
@@ -41,7 +78,9 @@ export default function Collection() {
               </li>
               <li className="flex flex-row items-center">
                 <input
+                onChange={togleCategory}
                   type="checkbox"
+                  value={"Women"}
                   name=""
                   id=""
                   className="mr-2 text-[#C1C1C1] "
@@ -50,7 +89,9 @@ export default function Collection() {
               </li>
               <li className="flex flex-row items-center">
                 <input
+                onChange={togleCategory}
                   type="checkbox"
+                  value={"Kids"}
                   name=""
                   id=""
                   className="mr-2 text-[#C1C1C1]"
@@ -66,7 +107,9 @@ export default function Collection() {
             <ul className=" flex flex-col  space-y-2">
               <li className=" flex flex-row items-center">
                 <input
+                onChange={togleSubCategory}
                   type="checkbox"
+                  value={"Topwear"}
                   name=""
                   id=""
                   className="mr-2 text-[#C1C1C1]"
@@ -77,6 +120,8 @@ export default function Collection() {
               </li>
               <li className="flex flex-row items-center">
                 <input
+                onChange={togleSubCategory}
+                  value={"Bottomwear"}
                   type="checkbox"
                   name=""
                   id=""
@@ -88,6 +133,8 @@ export default function Collection() {
               </li>
               <li className="flex flex-row items-center">
                 <input
+                onChange={togleSubCategory}
+                value={"Winterwear"}
                   type="checkbox"
                   name=""
                   id=""
