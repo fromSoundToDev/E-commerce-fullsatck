@@ -12,6 +12,12 @@ export default function Collection() {
  const {products}  = useContext(ShopContext)
  const [category,setCategory] = useState([])
  const [subCategory,setSubCategory] =useState([])
+ const [filterPrice,setFilterPrice] = useState("relevant")
+ 
+
+
+
+ 
 
  const togleCategory = (e)=>{
   if (category.includes(e.target.value)) {
@@ -44,6 +50,30 @@ const applyFilter = ()=>{
   setFilterProduct(productsCopy)
 }
 
+// filter by relevant price 
+
+const togleFilterPrice = (e) => {
+
+  const newFilter = e.target.value
+  
+  let ftpCopy = filterProduct.slice();
+  
+  switch (newFilter) {
+    case  newFilter=== "low to hight":
+       setFilterProduct([...ftpCopy].sort((a, b) => a.price - b.price))
+   
+      break;
+
+    case newFilter==="hight to low":
+     setFilterProduct( [...ftpCopy].sort((a, b) => b.price - a.price))
+      break;
+
+    default:
+      applyFilter();
+      break;
+  }
+}
+
  useEffect(() => {
    setFilterProduct(products)
  }, [])
@@ -51,6 +81,12 @@ const applyFilter = ()=>{
  useEffect(()=>{
   applyFilter()
  },[category,subCategory])
+
+ useEffect(()=>{
+togleFilterPrice()
+
+ },[])
+
   return (
     <div className="flex flex-col sm:grid sm:grid-cols-6 gap-2">
       <div className="col-span-1 py-4">
@@ -164,14 +200,14 @@ const applyFilter = ()=>{
             <hr className=" w-10 h-[2px] bg-[#252525]" />
           </div>
           {/* selection  */}
-          <select name="" id="" className=" border-gray-300 text-sm p-2">
-            <option value="" className="">
+          <select name="" id=""  onChange={togleFilterPrice} className=" border-gray-300 text-sm p-2">
+            <option value="relevant" className="">
               sort by: relevant
             </option>
-            <option value="" className="">
+            <option value="hight to low" className="">
               sort by: hight to low
             </option>
-            <option value="" className="">
+            <option value="low to hight" className="">
               sort by: low to hight
             </option>
           </select>
